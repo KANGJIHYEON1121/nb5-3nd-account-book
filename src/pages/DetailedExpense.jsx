@@ -35,7 +35,7 @@ const DetailedExpense = ({ expense, setExpense }) => {
       id: expenseId,
       item: editItem,
       date: editDate,
-      amount: editAmount,
+      amount: Number(editAmount),
       description: editDescription,
     };
 
