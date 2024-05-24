@@ -1,16 +1,20 @@
+import { useContext } from 'react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { AccountContext } from '../context/AccountContext';
 
 const ExpenseList = styled.li`
   display: flex;
   flex-direction: column;
 `;
 
-const DetailedExpense = ({ expense, setExpense }) => {
+const DetailedExpense = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const expenseId = location.pathname.split('/')[2];
+
+  const { expense, setExpense } = useContext(AccountContext);
 
   const selectExpenseArr = expense.find((item) => item.id === expenseId);
   const [editDate, setEditDate] = useState(selectExpenseArr.date);
@@ -21,11 +25,10 @@ const DetailedExpense = ({ expense, setExpense }) => {
   );
 
   // 핸들러 함수
-  const handleDateChange = (event) => setEditDate(event.target.value);
-  const handleItemChange = (event) => setEditItem(event.target.value);
-  const handleAmountChange = (event) => setEditAmount(event.target.value);
-  const handleDescriptionChange = (event) =>
-    setEditDescription(event.target.value);
+  const handleDateChange = (e) => setEditDate(e.target.value);
+  const handleItemChange = (e) => setEditItem(e.target.value);
+  const handleAmountChange = (e) => setEditAmount(e.target.value);
+  const handleDescriptionChange = (e) => setEditDescription(e.target.value);
 
   // 수정 기능
   const expenseChange = (e) => {

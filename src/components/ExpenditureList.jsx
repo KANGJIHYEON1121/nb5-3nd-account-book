@@ -1,13 +1,16 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AccountContext } from '../context/AccountContext';
 
-const ExpenditureList = ({ expense }) => {
+const ExpenditureList = () => {
   const month = JSON.parse(localStorage.getItem('selectedMonth'));
   const navigate = useNavigate();
+  const contextData = useContext(AccountContext);
 
   return (
     <div>
       <ul>
-        {expense
+        {contextData.expense
           .filter((filteredExpenseList) => {
             return Number(filteredExpenseList.date.split('-')[1]) === month;
           })

@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
+import { AccountContext } from '../context/AccountContext';
 
 const Button = styled.button`
   width: 15%;
@@ -18,7 +20,7 @@ const Button = styled.button`
   }
 `;
 
-const MonthView = ({ activeIndex, setActiveIndex }) => {
+const MonthView = () => {
   const monthArr = [
     '1월',
     '2월',
@@ -37,6 +39,8 @@ const MonthView = ({ activeIndex, setActiveIndex }) => {
   useEffect(() => {
     setActiveIndex(JSON.parse(localStorage.getItem('selectedMonth')) - 1);
   }, []);
+
+  const { activeIndex, setActiveIndex } = useContext(AccountContext);
 
   const monthClick = (index) => {
     setActiveIndex(index);

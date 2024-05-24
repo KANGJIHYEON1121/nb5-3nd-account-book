@@ -95,8 +95,12 @@ ul p {
 }
 
 .item-content {
+  max-width: 600px;
   font-size: 18px;
   font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .price {

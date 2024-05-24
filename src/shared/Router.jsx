@@ -60,15 +60,10 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={<Home expense={expense} setExpense={setExpense} />}
-        />
+        <Route path="/" element={<Home setExpense={setExpense} />} />
         <Route
           path="/detailedExpense/:id"
-          element={
-            <DetailedExpense expense={expense} setExpense={setExpense} />
-          }
+          element={<DetailedExpense setExpense={setExpense} />}
         />
       </Routes>
     </BrowserRouter>

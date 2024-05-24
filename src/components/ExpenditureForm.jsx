@@ -1,6 +1,10 @@
+import { useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { AccountContext } from '../context/AccountContext';
 
-const ExpenditureForm = ({ setExpense }) => {
+const ExpenditureForm = () => {
+  const { setExpense } = useContext(AccountContext);
+
   const onSubmit = (e) => {
     e.preventDefault();
 
