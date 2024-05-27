@@ -4,15 +4,15 @@ import ExpenditureList from '../components/ExpenditureList';
 import GlobalStyle from '../GlobalStyle';
 import { useState } from 'react';
 
-const App = ({ expense, setExpense }) => {
+const App = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   return (
     <main>
       <GlobalStyle />
-      <ExpenditureForm setExpense={setExpense} />
+      <ExpenditureForm />
       <MonthView activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
-      <ExpenditureList expense={expense} activeIndex={activeIndex} />
+      <ExpenditureList activeIndex={activeIndex} />
     </main>
   );
 };

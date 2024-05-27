@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const ExpenditureList = ({ expense }) => {
+const ExpenditureList = () => {
   const month = JSON.parse(localStorage.getItem('selectedMonth'));
   const navigate = useNavigate();
+  const expense = useSelector((state) => state.expense);
 
   return (
     <div>

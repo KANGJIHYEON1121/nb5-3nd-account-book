@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeExpense, deleteExpense } from '../redux/slices/expenseSlice';
+// import { changeExpense, deleteExpense } from '../redux/modules/expense';
 
 const ExpenseList = styled.li`
   display: flex;
   flex-direction: column;
 `;
 
-const DetailedExpense = ({ expense, setExpense }) => {
+const DetailedExpense = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const expenseId = location.pathname.split('/')[2];
+
+  const expense = useSelector((state) => state.expense);
+  const dispatch = useDispatch();
 
   const selectExpenseArr = expense.find((item) => item.id === expenseId);
   const [editDate, setEditDate] = useState(selectExpenseArr.date);
@@ -27,35 +33,19 @@ const DetailedExpense = ({ expense, setExpense }) => {
   const handleDescriptionChange = (event) =>
     setEditDescription(event.target.value);
 
+  const updatedExpense = {
+    id: expenseId,
+    item: editItem,
+    date: editDate,
+    amount: Number(editAmount),
+    description: editDescription,
+  };
+
   // 수정 기능
   const expenseChange = (e) => {
     e.preventDefault();
 
-    const updatedExpense = {
-      id: expenseId,
-      item: editItem,
-      date: editDate,
-      amount: Number(editAmount),
-      description: editDescription,
-    };
-
-    const updatedExpenses = expense.map((exp) =>
-      exp.id === expenseId ? updatedExpense : exp
-    );
-
-    setExpense(updatedExpenses);
-
     navigate('/');
-  };
-
-  // 삭제기능
-  const deleteExpense = () => {
-    if (confirm('지출 항목을 삭제 하시겠습니까?')) {
-      const updatedExpenses = expense.filter((item) => item.id !== expenseId);
-
-      setExpense(updatedExpenses);
-      navigate('/');
-    }
   };
 
   return (
@@ -100,10 +90,23 @@ const DetailedExpense = ({ expense, setExpense }) => {
           </div>
         </ExpenseList>
         <div className="button-list">
-          <button type="submit" className="edit-btn">
+          <button
+            onClick={() => {
+              dispatch(changeExpense(updatedExpense));
+            }}
+            className="edit-btn"
+          >
             수정
           </button>
-          <button className="delete-btn" onClick={deleteExpense}>
+          <button
+            className="delete-btn"
+            onClick={() => {
+              if (confirm('지출 항목을 삭제 하시겠습니까?')) {
+                dispatch(deleteExpense(expenseId));
+                navigate('/');
+              }
+            }}
+          >
             삭제
           </button>
           <button

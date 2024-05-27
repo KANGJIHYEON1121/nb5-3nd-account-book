@@ -64,12 +64,7 @@ const Router = () => {
           path="/"
           element={<Home expense={expense} setExpense={setExpense} />}
         />
-        <Route
-          path="/detailedExpense/:id"
-          element={
-            <DetailedExpense expense={expense} setExpense={setExpense} />
-          }
-        />
+        <Route path="/detailedExpense/:id" element={<DetailedExpense />} />
       </Routes>
     </BrowserRouter>
   );

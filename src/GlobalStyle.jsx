@@ -45,8 +45,6 @@ body form button {
   border: none;
   height: 28px;
   cursor: pointer;
-  position: relative;
-  top: 9px;
 }
 
 .month-btn-div {
